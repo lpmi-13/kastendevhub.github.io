@@ -25,7 +25,7 @@ The industry definition can be found below:
 
 I may also refer to GitOps in this post as CI/CD, as it can be considered a predecessor to GitOps. My take is that perhaps you are not a software development house today so maybe CI "Continious Integration" is not something that crosses your mind, however CD (Continuous Delivery) will absolutely be something every single customer running some sort of software should be considering deploying their software the GitOps way. 
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture1.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture1.png)
 
 As software companies are speeding up the delivery of their software, where major releases can now occur within weeks rather than years, then GitOps is going to help you stay in control of these updates and provide you with a good way to keep track of those updates, but also provide a rollback workflow when bad things happen. Now if you only have one off-the-shelf software in your environment, maybe this is a stretch, but if you have lots of COTS (Commercial off-the-shelf software) then a GitOps approach is going to significantly help with management and control. 
 
@@ -39,17 +39,17 @@ As you can see from the above description, ArgoCD is specifically built for Kube
 
 For the example in this post, we are going to be using a git-based repository with ArgoCD to get our Kubernetes application up and running. You can see what this application looks like below. 
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture2.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture2.png)
 
 ## GitOps plus Data 
 
 Note that in the application architecture above, there is a persistent volume (PV). This persistent volume is attached to a MySQL database, which our application is using to store its mission-critical persistent data. 
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture3.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture3.png)
 
 Whilst our git repository is great for our application's Kubernetes objects, the application source code has no idea about the database and the contents of the database. 
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture4.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture4.png)
 
 Thus, when it comes to our database and its important contents, version control systems alone will not store or protect this data.
 
@@ -61,7 +61,7 @@ Requires the entire application stack including the data!
 
 Data, and the dependencies of the stack on the data be discovered, tracked, and captured.
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture5.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture5.png)
 
 It is because of this that we must also protect our application data at specific times throughout its lifecycle and the best time for this to occur is prior to upgrading our application, as well as on an ongoing basis, to accoutn for other failure scenarios. 
 
@@ -129,7 +129,7 @@ We also use a pre-sync job (with corresponding service account (sa) and rolebind
 
 At the first sync an empty restore point should be created because the backup action is always executed before the deployment of the app.
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture6.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture6.png)
 
 ## Add some data
 
@@ -158,7 +158,7 @@ exit
 exit
 ```
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture7.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture7.png)
 
 ## Create ConfigMap to help manipulate data
 
@@ -178,7 +178,7 @@ git commit -m "Adding forbidden species"
 git push
 ```
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture8.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture8.png)
 
 When deploying the app with ArgoCD, we can see that a second restore point has been created automatically.
 
@@ -243,7 +243,7 @@ mysql --user=root --password=ultrasecurepassword
 USE test;
 SELECT * FROM pets;
 ```
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture9.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture9.png)
 
 ## The Recovery
 At this stage we could roll back using ArgoCD to our previous version, prior to Phase 4, but you will notice that this just brings back our configuration and it is not going to bring back our data! 
@@ -262,7 +262,7 @@ USE test;
 SELECT * FROM pets;
 ```
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture10.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture10.png)
 
 ## Righting our wrongs
 We have rectified our mistake in the code and would like to correctly implement this now into our application. 
@@ -321,7 +321,7 @@ SELECT * FROM pets;
 
 Phew! Because we implemented data protection alongside ArgoCD, we will not only have our desired data in our database, but also peace of mind that we have a way of recovering if this accident happens again. 
 
-![](/images/posts/2024-04-25-integrating-backups-into-gitops/Picture11.png)
+![](images/posts/2024-04-25-integrating-backups-into-gitops/Picture11.png)
 
 This post was to highlight the importance of data within our applications, remember I also mentioned that this MySQL database or any other data service might also be external to the Kubernetes cluster, but the same issues may arise. We need to ensure we protect both our application configuration AND our application data, as our version control system is "unaware" of any data stored within a database.
 

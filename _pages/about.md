@@ -3,7 +3,7 @@ layout: page
 title: About
 description: Veeam Kasten provides K8s data protection, backup, and mobility for cloud native workloads
 permalink: /about/
-image: '/images/about.jpg'
+image: 'images/about.jpg'
 image_caption: 'Photo by Tom Manville, VP of Engineering Kasten by Veeam'
 ---
 

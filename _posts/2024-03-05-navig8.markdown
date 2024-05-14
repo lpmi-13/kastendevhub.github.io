@@ -31,7 +31,7 @@ In 2015 a startup project called Deis developed Helm as a declarative manner to 
 
 In 2019, Helm, version 3, simplified the Helm experience by removing the Tiller server component and improving the Chart format and capabilities. Charts can leverage various libraries for reuse and templating and more importantly, you can serve, publish, and distribute a Helm chart through any web server. Overall, Helm 3 represented a significant step forward toward simplified Helm adoption.
 
-![Helm History](/images/posts/2024-03-05-navig8/helm_timeline.webp)
+![Helm History](images/posts/2024-03-05-navig8/helm_timeline.webp)
 
 
 The Challenges of Using Helm
@@ -51,7 +51,7 @@ Documentation is often lacking for mature and exhaustive charts, increasing the 
 How Does Navig8 Help?
 =====================
 
-![Navig8 Project](/images/posts/2024-03-05-navig8/navig8.png)
+![Navig8 Project](images/posts/2024-03-05-navig8/navig8.png)
 
 Kasten by Veeam created [Navig8](https://github.com/navig8s/navig8) to help new Kubernetes adopters deploy any application with a Helm Chart and a values.schema.json resource. Navig8 is an open-source project that simplifies the configuration and deployment of any application. Navig8 has an easy-to-use web based user interface which guides the user to create validated settings and consolidates any reference documentation. By increasing Helm chart configuration success, Navig8 reduces the time required to deploy Kubernetes applications.
 

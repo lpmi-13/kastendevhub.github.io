@@ -244,7 +244,7 @@ EOF
 
 in the OpenShift dashboard, navigate to **Observe > Targets** and search for `ns1` you shoud see this new target.
 
-![find the target defined in service monitor](/images/posts/2024-01-12-kasten-openshift-monitoring/list-target.png)
+![find the target defined in service monitor](images/posts/2024-01-12-kasten-openshift-monitoring/list-target.png)
 
 # Access These Metrics from the Outside 
 
@@ -667,10 +667,10 @@ The non integer value `1.0526315789473684` is because even if we see a change fr
 You can also create a graph in the promethus UI to get a better visibility of this signal. 
 
 Within the 10 minutes of the backup the number of failed backup increase : 
-![Signal start](/images/posts/2024-01-12-kasten-openshift-monitoring/start-signal.png)
+![Signal start](images/posts/2024-01-12-kasten-openshift-monitoring/start-signal.png)
 
 But after 10 minutes the `increase` eval again to zero:
-![Signal has stopped](/images/posts/2024-01-12-kasten-openshift-monitoring/stop-signal.png)
+![Signal has stopped](images/posts/2024-01-12-kasten-openshift-monitoring/stop-signal.png)
 
 From an alerting point of view, what you need to do at the end is to capture when this expression will be true 
 

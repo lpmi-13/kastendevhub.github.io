@@ -21,7 +21,7 @@ I am not in anyway picking on GitHub, rather all SaaS providers will have a term
 
 One thing worth noting is, like any service account, security is a concern. You should protect this with multi-factor authentication (MFA), but this is not a barrier against certain malicious activity, namely internal malice. 
 
-![GitHub Terms of Service for Account Security](/images/posts/2024-04-22-source-code-repo-backup/1.jpg)
+![GitHub Terms of Service for Account Security](images/posts/2024-04-22-source-code-repo-backup/1.jpg)
 
 We have named one area of risk, but there are possibly others to consider:
 
@@ -62,7 +62,7 @@ To achieve this we are going to create the following in our Kubernetes cluster, 
 
 This is a work in progress and there is a potential that with some of the native functions available in Kanister we could possibly not have a deployment consistently running but only run the pod when the backup orchestration is taking place. 
 
-![](/images/posts/2024-04-22-source-code-repo-backup/2.png)
+![](images/posts/2024-04-22-source-code-repo-backup/2.png)
 
 # Deployment 
 

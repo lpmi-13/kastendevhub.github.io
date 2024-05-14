@@ -20,7 +20,7 @@ Any `image` or media referenced by posts should be saved to `images/posts/` It i
 
 #### Drafts and Multiple Authors
 
-You can actively iterate and/or collaborate by making a post in the `_drafts` folder, omitting a filename date prefix, and reviewing with the `bundle exec jekyll serve --baseurl='' --drafts --livereload --open-url` flag. Drafts are not generated for the production environment, but they will exist in this public git repository when part of a push, PR, etc. Promote by `git mv _drafts/YOURPOST.md _posts/DATE-YOURPOST.md` and make a pull request when ready.
+You can actively iterate and/or collaborate by making a post in the `_drafts` folder, omitting a filename date prefix, and reviewing with the `bundle exec jekyll serve --drafts --livereload --open-url` flag. Drafts are not generated for the production environment, but they will exist in this public git repository when part of a push, PR, etc. Promote by `git mv _drafts/YOURPOST.md _posts/DATE-YOURPOST.md` and make a pull request when ready.
 
 The `author` variable accepts multiple authors, each author will get a post count credit and link, but the author icon will show the admin.
 
@@ -30,7 +30,7 @@ The script `./new_draft_post.sh` leverages [_drafts/_template.md](_drafts/_templ
 
 __NOT TESTED:__ You can set the publishing `date` variable for the future, but currently, there is no scheduled publishing job; so it will go out with the next publish operation and appear after that date.
 
-You can unpublish or hide posts (temporarily or forever) by setting the variable `published: false` and review them locally with the `bundle exec jekyll serve --baseurl='' --livereload --open-url --unpublished` flag. Unpublished posts remain in the repository.
+You can unpublish or hide posts (temporarily or forever) by setting the variable `published: false` and review them locally with the `bundle exec jekyll serve --livereload --open-url --unpublished` flag. Unpublished posts remain in the repository.
 
 ### Pages
 
@@ -100,7 +100,7 @@ bundle install # should install to local, not global or system Ruby
 
 1. Within a terminal, navigate to the source for the site.
 2. Run `bundle install` to install the Ruby gem dependencies.
-3. Run `bundle exec jekyll serve --baseurl='' --drafts --livereload --open-url &`
+3. Run `bundle exec jekyll serve --drafts --livereload --open-url &`
 
 ## Resources
 

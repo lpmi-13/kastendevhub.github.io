@@ -27,7 +27,7 @@ Rather than risk butchering a description of Harvester, I'll plagerize the good 
 > Harvester is a modern HCI solution built for bare metal servers using Linux, KVM, Kubernetes, KubeVirt, and Longhorn. It is free, flexible, and future-proof for running cloud-native and VM workloads in datacenter and at the edge.
 
 And wowee, is it cool. So cool in fact that I ditched my previous homelab virtualization providers (I'll not mention their names to protect the innocent... also Veeam has relationships with them and has backup offerings for each) and gone head first with Harvester.
-![Harvester UI](/images/posts/2024-03-21-harvester/harvester_ui.png)
+![Harvester UI](images/posts/2024-03-21-harvester/harvester_ui.png)
 
 And while Harvester provides a lot of day 1 functionality that is needed for Virtual Machine management (e.g. images, cloning, power operations, mountint disks, etc), Longhorn backup leaves a bit more to be desired... Also factor in that you may have applications that are comprised of both VM and containerized components, you'll want something that can protect all of these assets in one go. The answer? Kasten K10 by Veeam!
 
@@ -38,7 +38,7 @@ First, install Harvester on your hardware. Suse makes this dead simple, you boot
 Next, connect to the cluster via KubeConfig... but HOW!? This requires a bit of detective work (or you can cheat like me and just ask the Suse Engineering team), but simply navigate to:
 
 **Support > Download KubeConfig** in the UI to download the kubeconfig YAML file.
-![Harvester KubeConfig](/images/posts/2024-03-21-harvester/harvester_kubeconfig.png)
+![Harvester KubeConfig](images/posts/2024-03-21-harvester/harvester_kubeconfig.png)
 
 Next, if you are like me and have multiple K8s clusters in your kubectl config, merge the Harvester kubeconfig with the new Harvester kubeconfig file:
 ```
@@ -115,10 +115,10 @@ EOF
 Heads up, you may see the path for the Remove operation with a funny character - `~1`. This is because the annotation Harvester uses has a forward slash (/), which isn't ideal in K8s, but fear not, as the character can be replaced with ~1 and will be parsed by Kasten as a forward slash.
 
 In the example below, we're protecting both a VM and a cloud native app in the same namespace, `source01`:
-![Harvester Namespace](/images/posts/2024-03-21-harvester/harvester_app_vm.png)
-![Kasten VM Backup](/images/posts/2024-03-21-harvester/kasten_backup.png)
+![Harvester Namespace](images/posts/2024-03-21-harvester/harvester_app_vm.png)
+![Kasten VM Backup](images/posts/2024-03-21-harvester/kasten_backup.png)
 
 When you restore a VM, ensure that you select the `harvesterpvcfix` transform to ensure the VM can be restored and booted successfully in Harvester:
-![Kasten Transform for Harvester](/images/posts/2024-03-21-harvester/kasten_harvester_transform.png)
+![Kasten Transform for Harvester](images/posts/2024-03-21-harvester/kasten_harvester_transform.png)
 
 And Voilà!, you can now backup, restore, and protect VMs AND applications deployed within Harvester using enterprise-grade backup with Kasten K10.

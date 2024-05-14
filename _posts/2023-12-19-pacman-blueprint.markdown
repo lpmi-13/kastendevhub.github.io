@@ -37,7 +37,7 @@ helm install pacman pacman/pacman -n pacman --create-namespace --set service.typ
 
 If all goes well, you should have pacman up and running in K8s in no time!
 
-![Pacman](/images/posts/2023-12-19-pacman-blueprint/pacman.png)
+![Pacman](images/posts/2023-12-19-pacman-blueprint/pacman.png)
 
 ```
 $ k get deploy -n pacman
@@ -48,11 +48,11 @@ pacman-mongodb   1/1     1            1           42d
 
 Note we have two deployments in the `pacman` namespace - `pacman` and `pacman-mongodb`. Let's play a quick game:
 
-![Pacman High Score](/images/posts/2023-12-19-pacman-blueprint/pacmanhighscore.png)
+![Pacman High Score](images/posts/2023-12-19-pacman-blueprint/pacmanhighscore.png)
 
 Wow, 500000000, I'm pretty great at pacman! So good in fact, I want to backup my score so if something happens, I can quickly recover it so I can brag next time I'm at a bar or there's an attractive person within earshot. Let's do so in the Kasten UI, at first just using the default Storage snapshot capabilities of our cluster's storage:
 
-![Backup Kasten Storage Snapshot](/images/posts/2023-12-19-pacman-blueprint/pacmanbackuppolicy.png)
+![Backup Kasten Storage Snapshot](images/posts/2023-12-19-pacman-blueprint/pacmanbackuppolicy.png)
 
 Pretty simple and easy! And for the most part, I'm in good shape. But what if lots of people are playing my pacman application simultaneously, in their naive, fruitless attempt to beat my incredible score and as a result, high scores are being written super frequently. The next time Kasten K10 performs a backup via snapshot, a score may be mid-write to the MongoDB, which means the write may start when the snapshot begins but doesn't finish writing before it finishes... that would be bad news. Remember the angry toddler?
 
@@ -122,7 +122,7 @@ EOF
 Notice how we escape the dollar sign character in the above YAML. That's because we're applying the YAML directly from a BASH shell (see the `cat <<EOF | k -n kasten-io apply -f -` at the top of the file ), and if we didn't do that, our local shell would be looking for a variable called `MONGODB_ROOT_PASSWORD` which probably doesn't exist on our local machine and in the rare case that it did, it may not match what's actually configured in our K8s cluster. Take a wild guess how I found this quirk when applying directly via shell...
 {: .alert-info }
 
-![Kasten Blueprints UI](/images/posts/2023-12-19-pacman-blueprint/blueprints.png)
+![Kasten Blueprints UI](images/posts/2023-12-19-pacman-blueprint/blueprints.png)
 
 Note how we define a `backupPreHook` and `backupPostHook` section in the blueprint, which are operations we're telling Kanister (and subsequently Kasten) to do before and after taking a snapshot.  Then note further down in our `command` subsection for each:
 
@@ -152,6 +152,6 @@ kubectl annotate deployment pacman-mongodb kanister.kasten.io/blueprint='mongo-h
 
 And we're good to go! Next time we perform a backup in Kasten K10, our blueprint will run, which will pause database operations, perform a storage snapshot, and resume database operations, and as a result, we'll have a happy ~~toddler~~ application on our hands!
 
-![Pacman Application Consistent Backup](/images/posts/2023-12-19-pacman-blueprint/pacmanbackup_appconsistent.png)
+![Pacman Application Consistent Backup](images/posts/2023-12-19-pacman-blueprint/pacmanbackup_appconsistent.png)
 
 To learn more, checkout our [interactive demos](https://veeamkasten.dev/tags/?tag=demo) or [videos on YouTube](https://www.youtube.com/@KastenByVeeam)!

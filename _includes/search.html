@@ -17,7 +17,7 @@
           {% for post in site.posts limit:4 %}
           <div class="search-recent__item">
             {% if post.image %}
-              <a class="search-recent__image" href="{{ post.url }}"><img class="lazy" data-src="{{site.baseurl}}{{post.image}}" alt="{{post.title}}"></a>
+              <a class="search-recent__image" href="{{ post.url }}"><img class="lazy" data-src="{{post.image}}" alt="{{post.title}}"></a>
             {% endif %}
             <div class="search-recent__content">
               <div class="search-recent__meta">

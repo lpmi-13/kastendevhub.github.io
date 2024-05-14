@@ -34,7 +34,7 @@ In the diagram below we can see that we have a Kubernetes cluster, this is where
 
 We then also have Veeam Backup for AWS deployed and for our example we have prebuilt a backup policy that protects our workloads (RDS Instance). 
 
-![Logical Diagram of Kasten Connected to Veeam Backup for AWS](/images/posts/2024-04-17-Extending-k10-vbAWS/1-vbaws-pre-12-1.png)
+![Logical Diagram of Kasten Connected to Veeam Backup for AWS](images/posts/2024-04-17-Extending-k10-vbAWS/1-vbaws-pre-12-1.png)
 
 For this example, we do not have anything running inside of the application namespace, but we can imagine there being a web front end application that connects to the AWS RDS instance. The above enables us to have part of our application within the Kubernetes cluster and another part external leveraging AWS services. We want to protect everything associated with the application as one. 
 
@@ -175,7 +175,7 @@ kubectl create secret generic vbaws-policy -n kasten-vbaws \
 We will first need the Veeam Backup for AWS IP address and port. You can find this information in your AWS management console.
 The default port is `11005` (although worth noting that this can be customized, so ensure that the port matches what was configured in Veeam Backup for AWS).
 
-![](/images/posts/2024-04-17-Extending-k10-vbAWS/2-vbaws-public-ip.jpg)
+![](images/posts/2024-04-17-Extending-k10-vbAWS/2-vbaws-public-ip.jpg)
 
 When deploying our Veeam Backup for AWS appliance, we need to define a `username` and `password`, which need to be specified in the secret above.
 
@@ -184,13 +184,13 @@ Finally we must get the ID of the policy that we have created and that we wish t
 We can obtain this through our Veeam Backup for AWS console by selecting the export to CSV or XML action and the ID will be visible,
 and must be specified in the secret. 
 
-![Veeam Backup for AWS Policy ID](/images/posts/2024-04-17-Extending-k10-vbAWS/3-vbaws-policy.jpg)
+![Veeam Backup for AWS Policy ID](images/posts/2024-04-17-Extending-k10-vbAWS/3-vbaws-policy.jpg)
 
 We should then add the API call to our policy, for RDS it will look like this - `rds/policies/16f23f8b-a811-4d62-976f-91c36c415f52`
 
 Also tested against `virtualMachines/policies/` for EC2 snapshot backups. 
 
-![Triggering a Veeam Backup for AWSpolicy via Kasten](/images/posts/2024-04-17-Extending-k10-vbAWS/4-vbaws-kasten-backup.jpg)
+![Triggering a Veeam Backup for AWSpolicy via Kasten](images/posts/2024-04-17-Extending-k10-vbAWS/4-vbaws-kasten-backup.jpg)
 
 Not yet tested but we should also be able to use: 
 
@@ -211,4 +211,4 @@ There were some significant changes in 12.1 of the Veeam Data Platform which inc
 
 I have further ideas on showing more extensibility like this when it comes to Virtual Machine backup especially when you now see Kubernetes being a first class citizen when it comes to running VMs on top of Kubernetes. I also have some other external data services I will cover in further posts. 
 
-![](/images/posts/2024-04-17-Extending-k10-vbAWS/5-vbaws-post-12-1.png)
+![](images/posts/2024-04-17-Extending-k10-vbAWS/5-vbaws-post-12-1.png)
